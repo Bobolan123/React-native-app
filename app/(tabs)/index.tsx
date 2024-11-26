@@ -1,44 +1,59 @@
-import { Image, StyleSheet, Platform } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { useState } from "react";
+import {
+    Image,
+    StyleSheet,
+    Platform,
+    View,
+    Text,
+    TextInput,
+    Button,
+} from "react-native";
 
 export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome to Mobile!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      
-    </ParallaxScrollView>
-  );
+    const [name, setName] = useState<string>("a");
+
+    return (
+        <View style={styles.stepContainer}>
+            <View>
+                <Text style={styles.text}>{name}</Text>
+                <TextInput
+                    onChangeText={v => setName(v)}
+                    value={name}
+                    style={styles.input}
+                    autoCapitalize="none"
+                    // keyboardType="numeric"
+                    maxLength={12}
+                    multiline
+                    autoCorrect={false}
+                />
+                <Button title="ok"/>
+            </View>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
+    titleContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 8,
+    },
+    stepContainer: {
+        flex: 1,
+        // alignItems:"center",
+        // justifyContent:"center"
+        paddingTop: 40,
+        paddingHorizontal: 20,
+    },
+    text: {
+        color: "black",
+        fontSize: 40,
+    },
+    input: {
+        borderColor: "violet",
+        borderWidth: 2,
+        fontSize: 40,
+        padding: 2,
+        paddingHorizontal: 20,
+    },
 });
